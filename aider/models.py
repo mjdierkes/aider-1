@@ -123,11 +123,12 @@ class ModelInfoManager:
         self.cache_dir = Path.home() / ".aider" / "caches"
         self.cache_file = self.cache_dir / "model_prices_and_context_window.json"
         self.content = None
+        # Create cache directory if it doesn't exist
+        os.makedirs(self.cache_dir, exist_ok=True)
         self._load_cache()
 
     def _load_cache(self):
         try:
-            self.cache_dir.mkdir(parents=True, exist_ok=True)
             if self.cache_file.exists():
                 cache_age = time.time() - self.cache_file.stat().st_mtime
                 if cache_age < self.CACHE_TTL:

@@ -241,6 +241,13 @@ class InputOutput:
         self.llm_history_file = llm_history_file
         if chat_history_file is not None:
             self.chat_history_file = Path(chat_history_file)
+            # Create chat history directory if it doesn't exist
+            try:
+                self.chat_history_file.parent.mkdir(parents=True, exist_ok=True)
+            except (PermissionError, OSError) as err:
+                print(f"Warning: Unable to create chat history directory {self.chat_history_file.parent}.")
+                print(err)
+                self.chat_history_file = None
         else:
             self.chat_history_file = None
 
