@@ -54,6 +54,9 @@ class AutoCoder(EditBlockCoder):
             num_lines = len(accumulated_output.strip().splitlines())
             line_plural = "line" if num_lines == 1 else "lines"
             self.io.tool_output(f"Added {num_lines} {line_plural} of output to the chat.")
+            # Only trigger reflection if there was an error (non-zero exit status)
+            if exit_status != 0:
+                self.reflected_message = accumulated_output
             return accumulated_output
 
 

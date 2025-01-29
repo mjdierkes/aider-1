@@ -27,6 +27,7 @@ Continue requesting additional files as needed.
 
 All file modifications must use this *SEARCH/REPLACE block* format.
 ONLY RETURN CODE IN A *SEARCH/REPLACE BLOCK*!
+
 {shell_cmd_prompt}
 """
 
